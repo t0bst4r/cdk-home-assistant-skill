@@ -1,7 +1,10 @@
 import { awscdk } from 'projen';
+import { BetterAutoMerge } from './projenrc/better-auto-merge';
+
+const projectOwner = 't0bst4r';
 
 const project = new awscdk.AwsCdkConstructLibrary({
-  author: 't0bst4r',
+  author: projectOwner,
   authorAddress: '82281152+t0bst4r@users.noreply.github.com',
   cdkVersion: '2.88.0',
   defaultReleaseBranch: 'main',
@@ -20,4 +23,16 @@ const project = new awscdk.AwsCdkConstructLibrary({
   // packageName: undefined,      /* The 'name' in package.json. */
   gitignore: ['.idea/'],
 });
+
+const buildIds = project.buildWorkflow?.buildJobIds;
+if (buildIds) {
+  const autoMerge = new BetterAutoMerge(project.github!, {
+    approvedReviews: 0,
+    ruleName: 'Automatic merge on successful build (account owner)',
+    queueName: 'Automatic merge on successful build (account owner)',
+  });
+  autoMerge.addConditions(...buildIds.map(buildId => `status-success=${buildId}`));
+  autoMerge.addConditions(`author=${projectOwner}`);
+}
+
 project.synth();

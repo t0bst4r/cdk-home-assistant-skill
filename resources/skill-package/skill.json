@@ -1,0 +1,24 @@
+{
+  "manifest": {
+    "manifestVersion": "1.0",
+    "publishingInformation": {
+      "category": "SMART_HOME",
+      "distributionCountries": [],
+      "locales": {
+      }
+    },
+    "permissions": [
+      {
+        "name": "alexa::async_event:write"
+      }
+    ],
+    "apis": {
+      "smartHome": {
+        "protocolVersion": "3",
+        "endpoint": {
+          "uri": "//override-uri"
+        }
+      }
+    }
+  }
+}

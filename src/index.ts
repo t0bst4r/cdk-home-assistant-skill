@@ -1,2 +1,1 @@
-export class HomeAssistantSkill {
-}
+export * from './home-assistant-skill';

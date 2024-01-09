@@ -22,3 +22,5 @@ tsconfig.tsbuildinfo
 /.eslintrc.json
 !.jsii
 /.mergify.yml
+/.gitattributes
+/.projenrc.ts
